@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import * as usersService from '../../utilities/users-services';
 import { Link } from 'react-router-dom';
+import './LogInForm.css';
 
 function LogInForm({ setUser, showSignup, setShowSignup }) {
   const [credentials, setCredentials] = useState({
     email: '',
-    password: ''
+    password: '',
   });
   const [error, setError] = useState('');
 
@@ -20,24 +21,42 @@ function LogInForm({ setUser, showSignup, setShowSignup }) {
       const user = await usersService.login(credentials); // The promise returned by the signUp service method will resolve to the user object included in the payload of the JSON Web Token (JWT)
       setUser(user);
     } catch {
-      console.error(err);
+      console.error(e);
       setError('Login failed. Please try again.');
     }
   }
 
   return (
-    <div>
-        <div className="form-container">
-            <form autoComplete="off" onSubmit={handleSubmit}>
-                <label htmlFor="email">Email</label>
-                <input type="text" name="email" value={credentials.email} onChange={handleChange} required placeholder='Email' />
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" value={credentials.password} onChange={handleChange} required placeholder='Password' />
-                <button type="submit">Log in</button>
-            </form>
-            <p>Don't have an account? Click <Link onClick={() => setShowSignup(!showSignup)}>here</Link> to sign up.</p>
-        </div>
-        <p className="error-message">{error}</p>
+    <div className="form-center">
+      <div className="form-container">
+        <form autoComplete="off" onSubmit={handleSubmit}>
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            value={credentials.email}
+            onChange={handleChange}
+            required
+            placeholder="Email"
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            value={credentials.password}
+            onChange={handleChange}
+            required
+            placeholder="Password"
+          />
+          <button type="submit">Log in</button>
+        </form>
+        <p>
+          Don&apos;t have an account? Click{' '}
+          <Link onClick={() => setShowSignup(!showSignup)}>here</Link> to sign
+          up.
+        </p>
+      </div>
+      <p className="error-message">{error}</p>
     </div>
   );
 }

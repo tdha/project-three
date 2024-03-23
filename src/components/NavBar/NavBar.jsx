@@ -1,24 +1,58 @@
-import { Link } from "react-router-dom";
-import * as userService from '../../utilities/users-services'
+import { Link } from 'react-router-dom';
+import * as userService from '../../utilities/users-services';
 
-function NavBar({ user, setUser }) {
+import { useState } from 'react';
+import './NavBar.css';
+import Hamburger from './Hamburger';
 
-    function handleLogOut() {
-        userService.logOut();
-        setUser(null);
-    }
+const NavBar = ({ user, setUser }) => {
+  const [showNavbar, setShowNavbar] = useState(false);
 
-    return (
-        <nav>
-            <span>Welcome {user.name}</span>
-            &nbsp; | &nbsp;
-            <Link to="/orders">Order History</Link>
-            &nbsp; | &nbsp;
-            <Link to="/orders/new">New Orders</Link>
-            &nbsp; | &nbsp;
-            <Link to="" onClick={ handleLogOut } >Log Out</Link>
-        </nav>
-    );
-}
+  const handleShowNavbar = () => {
+    setShowNavbar(!showNavbar);
+  };
+
+  function handleLogOut() {
+    userService.logOut();
+    setUser(null);
+  }
+
+  return (
+    <>
+      <nav className="navbar">
+        <div className="container">
+          <div className="logo">
+            <img src="../../assets/logo.png" alt="" />
+          </div>
+          <div className="menu-icon" onClick={handleShowNavbar}>
+            {<Hamburger />}
+          </div>
+          <div className={`nav-elements  ${showNavbar && 'active'}`}>
+            <ul>
+              <li>Hello, {user.name}</li>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/blog">Blog</Link>
+              </li>
+              <li>
+                <Link to="/projects">Projects</Link>
+              </li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+              <li>
+                <Link to="/" onClick={handleLogOut}>
+                  Log Out
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
+};
 
 export default NavBar;

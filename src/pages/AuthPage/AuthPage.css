@@ -1,0 +1,13 @@
+.login {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login img {
+  height: 120px;
+  width: 120px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
