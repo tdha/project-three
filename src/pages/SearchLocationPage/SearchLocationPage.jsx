@@ -72,7 +72,7 @@ const SearchLocationPage = () => {
             arrival_location_ids: ['other-location-0'],
             departure_location_id: 'starting-location',
             departure_time: '2024-03-21T22:00:00.000Z',
-            travel_time: 3000,
+            travel_time: 5400,
             properties: ['travel_time', 'distance'],
             transportation: {
               type: transportation,
