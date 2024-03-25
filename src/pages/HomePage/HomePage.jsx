@@ -126,23 +126,36 @@ const HomePage = ({ search, sendInformation }) => {
       console.error('Error fetching distance:', error);
     }
   };
-   // console.log(mappedResults[0].locations[0].properties[0].travel_time)
+   
 
-   function showResults(results) {
-    console.log('SR triggered')
-    let filteredResults = results.flatMap(result =>
-      result.locations.flatMap(location =>
-        location.properties.filter(el => {
-          if (el.travel_time < 600) { // 10 minutes in seconds
-            console.log('Filtered Property:', el, location);
-            return true; // Keep the property in the filtered array
+  function showResults(results) {
+    let tenMinuteArray = [];
+    let twentyMinuteArray = [];
+    let thirtyMinuteArray = [];
+  
+    results.forEach(result =>
+      result.locations.forEach(location =>
+        location.properties.forEach(element => {
+          if (element.travel_time < 600) {
+            tenMinuteArray.push(location);
+          } else if (element.travel_time >= 600 && element.travel_time < 1200) {
+            if (twentyMinuteArray.length < 9) {
+              twentyMinuteArray.push(location);
+            }
+          } else if (element.travel_time >= 1200 && element.travel_time < 1800) {
+            if (thirtyMinuteArray.length < 9) {
+              thirtyMinuteArray.push(location);
+            }
           }
-          return false; // Exclude the property from the filtered array
         })
       )
     );
-    console.log('FR', filteredResults);
+  
+    console.log('10min', tenMinuteArray);
+    console.log('20min', twentyMinuteArray);
+    console.log('30min', thirtyMinuteArray);
   }
+  
   
 
   
