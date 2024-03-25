@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { properties } from '../../../seed';
+import { RotatingTriangles } from 'react-loader-spinner';
+import ResultPage from '../ResultPage/ResultPage';
+import './HomePage.css';
 
-const HomePage = () => {
+const HomePage = ({ search, sendInformation }) => {
   const [address1, setAddress1] = useState('');
   const [transportation, setTransportation] = useState('driving');
+  const [mappedResults, setMappedResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const fetchCoordinates = async (address) => {
     const apiUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
       address
@@ -26,18 +31,6 @@ const HomePage = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const startingLocation = await fetchCoordinates(address1);
-
-    if (startingLocation) {
-      await fetchDistance(startingLocation, properties);
-    } else {
-      console.log('Failed to fetch coordinates for one or both addresses.');
-    }
-  };
-
   const fetchDistance = async (startingLocation, properties) => {
     const locationObjects = properties.map((property, index) => ({
       id: `other-location-${index}`,
@@ -46,6 +39,7 @@ const HomePage = () => {
         lng: property.coordinates.lon,
       },
       propertyData: property,
+      transportation,
     }));
 
     const requestBody = {
@@ -87,80 +81,96 @@ const HomePage = () => {
       });
 
       const data = await res.json();
-      console.log(data);
 
       const results = Array.isArray(data.results)
         ? data.results
         : [data.results];
 
-      const mappedResults = results.map((result) => {
-        const locations = result.locations.map((location) => {
-          const locationObject = locationObjects.find(
-            (obj) => obj.id === location.id
-          );
+      setMappedResults(
+        results.map((result) => {
+          const locations = result.locations.map((location) => {
+            const locationObject = locationObjects.find(
+              (obj) => obj.id === location.id
+            );
+            return {
+              ...location,
+              propertyData: locationObject ? locationObject.propertyData : null,
+              transportation,
+            };
+          });
           return {
-            ...location,
-            propertyData: locationObject ? locationObject.propertyData : null,
+            ...result,
+            locations,
           };
-        });
-        return {
-          ...result,
-          locations,
-        };
-      });
-
-      console.log(mappedResults);
-      showResults(mappedResults)
+        })
+      );
     } catch (error) {
       console.error('Error fetching distance:', error);
     }
   };
 
-  function showResults(mappedResults) {    
-    console.log((mappedResults[0].locations[3].propertyData.property_post_code
-      ))
-    console.log((mappedResults[0].locations[3].properties[0].travel_time)/60)
-    console.log((mappedResults[0].locations[3].propertyData.purchase_price))
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-      const locationsData = mappedResults[0].locations.map(location => {
-        return {
-          postcode: location.propertyData.property_post_code,
-          travel_time: location.properties[0].travel_time,
-          postcode: location.propertyData.purchase_price
-          postcode: location.propertyData.property_post_code,
-        };
-      });
+    const startingLocation = await fetchCoordinates(address1);
 
-  }
+    if (startingLocation) {
+      await fetchDistance(startingLocation, properties);
+      setIsLoading(false);
+      sendInformation();
+    } else {
+      console.log('Failed to fetch coordinates for one or both addresses.');
+    }
+  };
 
   return (
-    <div className="search-container">
-      <h2>Address Distance Calculator</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="address1">Address 1:</label>
-        <input
-          id="address1"
-          type="text"
-          value={address1}
-          onChange={(e) => setAddress1(e.target.value)}
-          required
-          placeholder="Address 1"
-        />
-        <label htmlFor="transportation">Transportation:</label>
-        <select
-          id="transportation"
-          value={transportation}
-          onChange={(e) => setTransportation(e.target.value)}
-        >
-          <option value="driving">Driving</option>
-          <option value="public_transport">Public Transport</option>
-          <option value="walking">Walking</option>
-        </select>
-        <button className="button-search" type="submit">
-          Calculate Distance
-        </button>
-      </form>
-    </div>
+    <>
+      {!search ? (
+        <div className="search-container">
+          <h2>Address Distance Calculator</h2>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="address1">Address 1:</label>
+            <input
+              id="address1"
+              type="text"
+              value={address1}
+              onChange={(e) => setAddress1(e.target.value)}
+              required
+              placeholder="Address 1"
+            />
+            <label htmlFor="transportation">Transportation:</label>
+            <select
+              id="transportation"
+              value={transportation}
+              onChange={(e) => setTransportation(e.target.value)}
+            >
+              <option value="driving">Driving</option>
+              <option value="public_transport">Public Transport</option>
+              <option value="walking">Walking</option>
+            </select>
+            <button className="button-search" type="submit">
+              Calculate Distance
+            </button>
+          </form>
+          <div className="loading">
+            {isLoading ? (
+              <RotatingTriangles
+                visible={true}
+                height="80"
+                width="80"
+                color="blue"
+                ariaLabel="rotating-triangles-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            ) : null}
+          </div>
+        </div>
+      ) : (
+        <ResultPage results={mappedResults} />
+      )}
+    </>
   );
 };
 export default HomePage;

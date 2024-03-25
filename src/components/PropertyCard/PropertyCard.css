@@ -1,0 +1,57 @@
+.property-card {
+  max-width: 500px;
+  min-width: 350px;
+  background-color: #f9f9f9b2;
+  width: 28%;
+  border-radius: 10px;
+  -webkit-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.property-card img {
+  background-size: cover;
+}
+
+.property-title {
+  width: 100%;
+  text-align: center;
+}
+
+.flex-items {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.property-details {
+  padding-left: 1rem;
+  width: 70%;
+  font-size: 1.2rem;
+}
+
+.property-favorite {
+  display: flex;
+  width: 30%;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0 1rem 1rem 0;
+}
+
+.property-favorite button {
+  height: 40px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.property-favorite button:hover {
+  background-color: #0056b3;
+}
