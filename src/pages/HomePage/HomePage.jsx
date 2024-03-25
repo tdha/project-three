@@ -89,12 +89,10 @@ const HomePage = () => {
       const data = await res.json();
       console.log(data);
 
-      // Verifica se data é uma matriz, caso contrário, envolve-a em uma matriz
       const results = Array.isArray(data.results)
         ? data.results
         : [data.results];
 
-      // Mapeia os resultados da API para incluir os dados da propriedade correspondente
       const mappedResults = results.map((result) => {
         const locations = result.locations.map((location) => {
           const locationObject = locationObjects.find(
