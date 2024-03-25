@@ -40,6 +40,9 @@ const NavBar = ({ user, setUser }) => {
                 <Link to="/projects">Projects</Link>
               </li>
               <li>
+                <Link to="/result">Result page</Link>
+              </li>
+              <li>
                 <Link to="/about">About</Link>
               </li>
               <li>

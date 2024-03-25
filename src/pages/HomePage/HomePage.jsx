@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { properties } from '../../../seed';
 
 const HomePage = () => {
+  const [result, setResult] = useState([]); 
   const [address1, setAddress1] = useState('');
   const [transportation, setTransportation] = useState('driving');
   const fetchCoordinates = async (address) => {
@@ -87,7 +88,7 @@ const HomePage = () => {
       });
 
       const data = await res.json();
-      console.log(data);
+      
 
       const results = Array.isArray(data.results)
         ? data.results
@@ -97,7 +98,9 @@ const HomePage = () => {
         const locations = result.locations.map((location) => {
           const locationObject = locationObjects.find(
             (obj) => obj.id === location.id
+        
           );
+          
           return {
             ...location,
             propertyData: locationObject ? locationObject.propertyData : null,
@@ -109,11 +112,33 @@ const HomePage = () => {
         };
       });
 
-      console.log(mappedResults);
+     console.log(mappedResults);
+      setResult(mappedResults);
+      
     } catch (error) {
       console.error('Error fetching distance:', error);
     }
   };
+   // console.log(mappedResults[0].locations[0].properties[0].travel_time)
+
+  function showResults(mappedResults) {
+    console.log('showR triggered')
+    // Object.filter = (arr, predicate) => Object.fromEntries(Object.entries(obj).filter(([key, value])=>
+    // predicate(value)));
+
+   
+    let filteredResults = mappedResults.flatMap(result =>
+      result.locations.flatMap(location =>
+        location.properties.filter(el =>
+          
+          el.travel_time < 600 // 10 minutes in seconds
+         
+  )
+      )
+    );
+    console.log(filteredResults)
+  }
+  
 
   return (
     <div className="search-container">
@@ -141,6 +166,9 @@ const HomePage = () => {
         <button className="button-search" type="submit">
           Calculate Distance
         </button>
+        <button onClick={() => showResults(result)}>Display results in console</button>
+
+       
       </form>
     </div>
   );
