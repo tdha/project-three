@@ -85,6 +85,7 @@ const SearchLocationPage = () => {
     const data = await res.json();
     console.log(data);
   };
+  
   return (
     <div className="search-container">
       <h2>Address Distance Calculator</h2>

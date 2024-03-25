@@ -34,10 +34,10 @@ const NavBar = ({ user, setUser }) => {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/blog">Blog</Link>
+              <Link to="/search">Search Location</Link>
               </li>
               <li>
-                <Link to="/projects">Projects</Link>
+                <Link to="/results">Search Results</Link>
               </li>
               <li>
                 <Link to="/about">About</Link>
