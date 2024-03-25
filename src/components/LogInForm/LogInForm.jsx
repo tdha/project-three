@@ -51,9 +51,8 @@ function LogInForm({ setUser, showSignup, setShowSignup }) {
           <button type="submit">Log in</button>
         </form>
         <p>
-          Don&apos;t have an account? Click{' '}
-          <Link onClick={() => setShowSignup(!showSignup)}>here</Link> to sign
-          up.
+          Click{' '}
+          <Link onClick={() => setShowSignup(!showSignup)}>here</Link> to create an account.
         </p>
       </div>
       <p className="error-message">{error}</p>

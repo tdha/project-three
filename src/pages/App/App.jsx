@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { getUser } from '../../utilities/users-services';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import AuthPage from '../AuthPage/AuthPage';
