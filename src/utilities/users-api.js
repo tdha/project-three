@@ -1,4 +1,4 @@
-import sendRequest from "./send-request";
+import sendRequest from "./send-request"; // 'send request' to communicate with backend
 const BASE_URL = '/api/users';
 
 export async function signUp(userData) {
@@ -10,5 +10,5 @@ export async function login(credentials) {
 }
 
 export async function checkToken() {
-    return sendRequest(BASE_URL + '/check-token');
+    return sendRequest(BASE_URL + '/check-token'); // GET
 }
