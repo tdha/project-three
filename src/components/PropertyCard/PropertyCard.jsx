@@ -34,6 +34,12 @@ const PropertyCard = ({
 
   const distanceInKilometers = distance / 1000;
 
+  // const affordability() {
+
+  // }
+
+
+
   return (
     <>
       <div className="property-card">
@@ -60,6 +66,9 @@ const PropertyCard = ({
             </p>
             <p>
               <strong>Transportation:</strong> {transportationType}
+            </p>
+            <p>
+              <strong>Postcode:</strong> {propertyData.property_post_code}
             </p>
           </div>
           <div className="property-favorite">
