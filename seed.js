@@ -11671,7 +11671,7 @@
       "Strata lot number": 71
     }
   ]
-=======
+
 export const properties = [
   {
     property_id: 2902610,

@@ -116,8 +116,21 @@ const HomePage = () => {
     }
   };
 
-  function showResults(mappedResults) {
-    console.log(mappedResults[0].locations[3].properties[0].travel_time)
+  function showResults(mappedResults) {    
+    console.log((mappedResults[0].locations[3].propertyData.property_post_code
+      ))
+    console.log((mappedResults[0].locations[3].properties[0].travel_time)/60)
+    console.log((mappedResults[0].locations[3].propertyData.purchase_price))
+
+      const locationsData = mappedResults[0].locations.map(location => {
+        return {
+          postcode: location.propertyData.property_post_code,
+          travel_time: location.properties[0].travel_time,
+          postcode: location.propertyData.purchase_price
+          postcode: location.propertyData.property_post_code,
+        };
+      });
+
   }
 
   return (
