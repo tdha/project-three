@@ -5,7 +5,7 @@ import { useState } from 'react';
 import './NavBar.css';
 import Hamburger from './Hamburger';
 
-const NavBar = ({ user, setUser }) => {
+const NavBar = ({ user, setUser, searchProperties }) => {
   const [showNavbar, setShowNavbar] = useState(false);
 
   const handleShowNavbar = () => {
@@ -31,7 +31,9 @@ const NavBar = ({ user, setUser }) => {
             <ul>
               <li>Hello, {user.name}</li>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/" onClick={searchProperties}>
+                  Home
+                </Link>
               </li>
               <li>
                 <Link to="/blog">Blog</Link>
