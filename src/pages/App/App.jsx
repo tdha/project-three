@@ -20,11 +20,15 @@ function App() {
       {user ? (
         <>
           <NavBar user={user} setUser={setUser} />
-          <div className="center-searchPage">
-            <SearchLocationPage />
-          </div>
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/"
+              element={
+                <div className="center-searchPage">
+                  <HomePage />
+                </div>
+              }
+            />
             <Route path="/orders/new" element={<NewOrderPage />} />
             <Route path="/orders" element={<OrderHistoryPage />} />
           </Routes>
