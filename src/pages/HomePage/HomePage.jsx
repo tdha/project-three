@@ -139,82 +139,48 @@ const HomePage = ({ search, sendInformation }) => {
   
 
   return (
-    <div className="search-container">
-      <h2>Address Distance Calculator</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="address1">Address 1:</label>
-        <input
-          id="address1"
-          type="text"
-          value={address1}
-          onChange={(e) => setAddress1(e.target.value)}
-          required
-          placeholder="Address 1"
-        />
-        <label htmlFor="transportation">Transportation:</label>
-        <select
-          id="transportation"
-          value={transportation}
-          onChange={(e) => setTransportation(e.target.value)}
-        >
-          <option value="driving">Driving</option>
-          <option value="public_transport">Public Transport</option>
-          <option value="walking">Walking</option>
-        </select>
-        <button className="button-search" type="submit">
-          Calculate Distance
-        </button>
-        <button onClick={() => showResults(result)}>Display results in console</button>
-
-       
-      </form>
-    </div>
     <>
-      {!search ? (
-        <div className="search-container">
-          <h2>Address Distance Calculator</h2>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="address1">Address 1:</label>
-            <input
-              id="address1"
-              type="text"
-              value={address1}
-              onChange={(e) => setAddress1(e.target.value)}
-              required
-              placeholder="Address 1"
+      <div className="search-container">
+        <h2>Address Distance Calculator</h2>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="address1">Address 1:</label>
+          <input
+            id="address1"
+            type="text"
+            value={address1}
+            onChange={(e) => setAddress1(e.target.value)}
+            required
+            placeholder="Address 1"
+          />
+          <label htmlFor="transportation">Transportation:</label>
+          <select
+            id="transportation"
+            value={transportation}
+            onChange={(e) => setTransportation(e.target.value)}
+          >
+            <option value="driving">Driving</option>
+            <option value="public_transport">Public Transport</option>
+            <option value="walking">Walking</option>
+          </select>
+          <button className="button-search" type="submit">
+            Calculate Distance
+          </button>
+        </form>
+        <div className="loading">
+          {isLoading ? (
+            <RotatingTriangles
+              visible={true}
+              height="80"
+              width="80"
+              color="blue"
+              ariaLabel="rotating-triangles-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
             />
-            <label htmlFor="transportation">Transportation:</label>
-            <select
-              id="transportation"
-              value={transportation}
-              onChange={(e) => setTransportation(e.target.value)}
-            >
-              <option value="driving">Driving</option>
-              <option value="public_transport">Public Transport</option>
-              <option value="walking">Walking</option>
-            </select>
-            <button className="button-search" type="submit">
-              Calculate Distance
-            </button>
-          </form>
-          <div className="loading">
-            {isLoading ? (
-              <RotatingTriangles
-                visible={true}
-                height="80"
-                width="80"
-                color="blue"
-                ariaLabel="rotating-triangles-loading"
-                wrapperStyle={{}}
-                wrapperClass=""
-              />
-            ) : null}
-          </div>
+          ) : null}
         </div>
-      ) : (
-        <ResultPage results={mappedResults} />
-      )}
+      </div>
+      {search && <ResultPage results={mappedResults} />}
     </>
-  );
+    )
 };
-export default HomePage;
