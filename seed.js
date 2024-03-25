@@ -727,7 +727,7 @@
       "Area": 80,
       "Sold date": "2024-03-01",
       "Purchase price": 720000,
-      "Strata lot number": 17
+      "Strata lot number": 17,      
     },
     {
       "Property ID": 3528435,
