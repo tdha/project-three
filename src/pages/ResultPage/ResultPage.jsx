@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate'; // this would not load (Dave)
 import './ResultPage.css';
 
 const ResultPage = ({ results }) => {
@@ -22,6 +22,22 @@ const ResultPage = ({ results }) => {
     .flatMap((result) => result.locations)
     .slice(indexOfFirstItem, indexOfLastItem);
 
+  // affordabilityChecker 
+  const suburbPrices = currentItems.reduce((acc, property) => {
+    const postcode = property.propertyData.property_post_code;
+    if (!acc[postcode]) {
+      acc[postcode] = [];
+    }
+    acc[postcode].push(property.propertyData.purchase_price);
+    return acc;
+  }, {});
+
+
+  
+
+
+
+
   return (
     <>
       <div className="result-page">
@@ -32,6 +48,7 @@ const ResultPage = ({ results }) => {
             travelTime={property.properties[0].travel_time}
             distance={property.properties[0].distance}
             transportation={property.transportation}
+            // postcode={property.}
           />
         ))}
         <ReactPaginate

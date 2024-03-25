@@ -42,6 +42,9 @@ const NavBar = ({ user, setUser, searchProperties }) => {
                 <Link to="/projects">Projects</Link>
               </li>
               <li>
+                <Link to="/result">Result page</Link>
+              </li>
+              <li>
                 <Link to="/about">About</Link>
               </li>
               <li>
