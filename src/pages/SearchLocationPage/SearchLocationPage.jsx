@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './SearchLocationPage.css';
+import { useNavigate } from 'react-router-dom';
+
 const SearchLocationPage = () => {
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');

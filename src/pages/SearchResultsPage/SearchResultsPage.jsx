@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 const SearchResultsPage = () => {
   const location = useLocation();
   const { travelInfo, propertyData } = location.state || {};
+//   const { data } = location.state;
 
   return (
     <div className="results-container">
