@@ -132,9 +132,13 @@ const HomePage = ({ search, sendInformation }) => {
     console.log('SR triggered')
     let filteredResults = results.flatMap(result =>
       result.locations.flatMap(location =>
-        location.properties.filter(el =>
-          el.travel_time < 600 // 10 minutes in seconds
-        )
+        location.properties.filter(el => {
+          if (el.travel_time < 600) { // 10 minutes in seconds
+            console.log('Filtered Property:', el, location);
+            return true; // Keep the property in the filtered array
+          }
+          return false; // Exclude the property from the filtered array
+        })
       )
     );
     console.log('FR', filteredResults);
