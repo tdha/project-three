@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { properties } from '../../../seed';
-import { RotatingTriangles } from 'react-loader-spinner';
+// import { RotatingTriangles } from 'react-loader-spinner'; // this would not load (Dave)
 import ResultPage from '../ResultPage/ResultPage';
 import './HomePage.css';
 
 
   
 const HomePage = ({ search, sendInformation }) => {
+  const [results, setResults] = useState([]);
   const [address1, setAddress1] = useState('');
   const [transportation, setTransportation] = useState('driving');
   const [mappedResults, setMappedResults] = useState([]);
@@ -119,7 +120,7 @@ const HomePage = ({ search, sendInformation }) => {
       });
 
      console.log(mappedResults);
-      setResult(mappedResults);
+      setResults(mappedResults)
       
     } catch (error) {
       console.error('Error fetching distance:', error);
@@ -127,14 +128,19 @@ const HomePage = ({ search, sendInformation }) => {
   };
    // console.log(mappedResults[0].locations[0].properties[0].travel_time)
 
-   function showResults(mappedResults) {
-    let filteredResults = mappedResults.flatMap(result =>
-      result.locations.flatMap(location => location.properties && location.propertyData
+   function showResults(results) {
+    console.log('SR triggered')
+    let filteredResults = results.flatMap(result =>
+      result.locations.flatMap(location =>
+        location.properties.filter(el =>
+          el.travel_time < 600 // 10 minutes in seconds
         )
-      
+      )
     );
-    console.log(filteredResults);
+    console.log('FR', filteredResults);
   }
+  
+
   
   
 
@@ -165,6 +171,7 @@ const HomePage = ({ search, sendInformation }) => {
           <button className="button-search" type="submit">
             Calculate Distance
           </button>
+          <button onClick={() => showResults(results)}>Display results in console</button>
         </form>
         <div className="loading">
           {isLoading ? (
@@ -184,3 +191,5 @@ const HomePage = ({ search, sendInformation }) => {
     </>
     )
 };
+
+export default HomePage;

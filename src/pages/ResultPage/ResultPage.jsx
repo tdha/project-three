@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate'; // this would not load (Dave)
 import './ResultPage.css';
 
 const ResultPage = ({ results }) => {
