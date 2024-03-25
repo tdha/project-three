@@ -110,10 +110,15 @@ const HomePage = () => {
       });
 
       console.log(mappedResults);
+      showResults(mappedResults)
     } catch (error) {
       console.error('Error fetching distance:', error);
     }
   };
+
+  function showResults(mappedResults) {
+    console.log(mappedResults[0].locations[3].properties[0].travel_time)
+  }
 
   return (
     <div className="search-container">

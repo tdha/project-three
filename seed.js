@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [
     {
       "Property ID": 2902610,
@@ -11671,7 +11670,7 @@
       "Strata lot number": 71
     }
   ]
-=======
+
 export const properties = [
   {
     'Property ID': 2902610,
@@ -27760,4 +27759,4 @@ export const properties = [
     },
   },
 ];
->>>>>>> 4ed20c8a31ca5fa146971fa49890a01fb4386256
+
