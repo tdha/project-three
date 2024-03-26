@@ -71,3 +71,7 @@ select:focus {
   padding-top: 1rem;
   text-align: center;
 }
+
+button {
+  margin-bottom: 1rem;
+}

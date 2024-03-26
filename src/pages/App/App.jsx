@@ -9,6 +9,7 @@ import AuthPage from '../AuthPage/AuthPage';
 import HomePage from '../HomePage/HomePage';
 
 import NavBar from '../../components/NavBar/NavBar';
+import FilteredPage from '../FilteredPage/FilteredPage';
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -37,6 +38,14 @@ function App() {
               element={
                 <div className="center-searchPage">
                   <HomePage search={search} sendInformation={sendInformation} />
+                </div>
+              }
+            />
+            <Route
+              path="/filter"
+              element={
+                <div className="center-searchPage">
+                  <FilteredPage search={search} sendInformation={sendInformation} />
                 </div>
               }
             />
