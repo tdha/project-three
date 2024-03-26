@@ -14,6 +14,9 @@ const HomePage = ({ search, sendInformation }) => {
     const [transportation, setTransportation] = useState('driving');
     const [mappedResults, setMappedResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [propertyType, setPropertyType] = useState('all')
+
+
     const fetchCoordinates = async (address) => {
         const apiUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
             address
@@ -167,7 +170,14 @@ const HomePage = ({ search, sendInformation }) => {
         const startingLocation = await fetchCoordinates(address1);
 
         if (startingLocation) {
-            await fetchDistance(startingLocation, properties);
+            // Filter properties based on the selected property type
+            const filteredProperties = propertyType === 'all' ? properties : properties.filter(property => {
+              return propertyType === 'house' ? !property.strata_lot_number : !!property.strata_lot_number;              
+            });
+            
+
+            //fetchDistance on filtered properties i.e. 'all', 'house' or 'apartment'
+            await fetchDistance(startingLocation, filteredProperties);
             setIsLoading(false);
             sendInformation();
 
@@ -203,6 +213,18 @@ const HomePage = ({ search, sendInformation }) => {
                             <option value="public_transport">Public Transport</option>
                             <option value="walking">Walking</option>
                         </select>
+
+                      {/* Add select dropdown for property type */}
+                      <label htmlFor="propertyType">Property Type:</label>
+                      <select 
+                        id="propertyType"
+                        value={propertyType}
+                        onChange={(e) => setPropertyType(e.target.value)}                                           
+                      >
+                        <option value="all">All</option>
+                        <option value="house">House</option>
+                        <option value="apartment">Apartment</option>
+                      </select>
                         <button className="button-search" type="submit">
                             Show results
                         </button>

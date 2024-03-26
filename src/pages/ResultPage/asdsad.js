@@ -60,3 +60,20 @@ const ResultPage = ({ results }) => {
   };
   
   export default ResultPage;
+
+
+  const startingLocation = await fetchCoordinates(address1);
+
+        if (startingLocation) {
+            // Filter properties based on the selected property type
+            const filteredProperties = propertyType === 'all' ? properties : properties.filter(property => {
+                return propertyType === 'house' ? !property.strata_lot_number : !!property.strata_lot_number;
+            });
+
+            await fetchDistance(startingLocation, filteredProperties);
+            setIsLoading(false);
+            sendInformation();
+        } else {
+            console.log('Failed to fetch coordinates for one or both addresses.');
+        }
+    };
