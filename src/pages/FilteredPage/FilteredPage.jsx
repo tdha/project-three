@@ -1,6 +1,6 @@
 import React from "react";
 
-const FilteredPage = ({ results  }) => {
+// const FilteredPage = ({ results  }) => {
     
 //  console.log(results);
 //     const fifteenMinuteDisplay = results.flatMap((property) => (
@@ -14,8 +14,12 @@ const FilteredPage = ({ results  }) => {
     // const travelTimes = fifteenMinute.map(property => property.properties[0].travel_time);
     // console.log(travelTimes);
 
-const FilteredPage = ({ fifteenMinute, setFifteenMinute }) => {
-    console.log(fifteenMinute);
+const FilteredPage = ({ fifteenMinuteArray }) => {
+    console.log(fifteenMinuteArray);
+
+    // const fifteenMinuteDisplay = fifteenMinute.flatMap((property) => (
+    //     <div>{property.propertyData.address}</div>
+    // ));
 
     return (
         <>      
@@ -38,9 +42,6 @@ export default FilteredPage;
 // // const FilteredPage = ({ fifteenMinute }) => {
 // //     console.log('this is FP', fifteenMinute);
 
-// //     const fifteenMinuteDisplay = fifteenMinute.flatMap((property) => (
-// //         <div>{property.propertyData.address}</div>
-// //     ));
     
 // //     // const fifteenMinuteDisplay = fifteenMinute.map(property => (
 // //     //     <div>{property.propertyData.address}</div>

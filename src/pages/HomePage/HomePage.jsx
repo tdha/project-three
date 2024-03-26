@@ -123,27 +123,32 @@ const HomePage = ({ search, sendInformation }) => {
 
             mappedResults.forEach(result =>
                 result.locations.forEach(location =>
-                    location.properties.forEach((a, b) => {
-                        if (a.travel_time < 900 || b.travel_time < 900) {
-                        //    element.propertyData.purchase_price < 
-                            fifteenMinuteArray.push(location);
-                        } else if (a.travel_time >= 900 && b.travel_time < 1800) {
+                    location.properties.forEach((a) => {
+                        if (a.travel_time < 900) {
                             
-                                thirtyMinuteArray.push(location);
+                            fifteenMinuteArray.push(location);
+                            fifteenMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);
+                            
+                        } else if (a.travel_time >= 900 && a.travel_time < 1800) {
+                            
+                            thirtyMinuteArray.push(location);
+                            thirtyMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);
                             
                         } else if (a.travel_time >= 1800 && a.travel_time < 2700) {
-                           
-                                fortyfiveMinuteArray.push(location);
-                           
+                            
+                            fortyfiveMinuteArray.push(location);
+                            fortyfiveMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);
+                            
                         } else if (a.travel_time >= 2700 && a.travel_time < 3600) {
-                           
-                                sixtyMinuteArray.push(location);
+                            
+                            sixtyMinuteArray.push(location);
+                            sixtyMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);
                             
                         }
                     })
                 )
             );
-                    setFifteenMinute(fifteenMinuteArray);
+            setFifteenMinute(fifteenMinuteArray);
             console.log('15min', fifteenMinuteArray);
             console.log('30min', thirtyMinuteArray);
             console.log('45min', fortyfiveMinuteArray);
