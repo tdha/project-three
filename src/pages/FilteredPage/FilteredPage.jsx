@@ -1,11 +1,11 @@
 import React from "react";
 
-const FilteredPage = ({ results  }) => {
+// const FilteredPage = ({ results  }) => {
     
- console.log(results);
-    const fifteenMinuteDisplay = results.flatMap((property) => (
-        <div>{property.propertyData.address}</div>
-    ));
+//  console.log(results);
+//     const fifteenMinuteDisplay = results.flatMap((property) => (
+//         <div>{property.propertyData.address}</div>
+//     ));
     
     // const fifteenMinuteDisplay = fifteenMinute.map(property => (
     //     <div>{property.propertyData.address}</div>
@@ -22,13 +22,6 @@ const FilteredPage = ({ fifteenMinuteArray }) => {
     // ));
 
     return (
-        <>      
-        
-            <div>
-             {fifteenMinuteDisplay}
-            </div>
-        </>
-
         <h1>
          FilteredPage 
          {/* {fifteenMinuteDisplay} */}
