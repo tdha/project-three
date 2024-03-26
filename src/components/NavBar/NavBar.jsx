@@ -29,13 +29,13 @@ const NavBar = ({ user, setUser, searchProperties }) => {
           </div>
           <div className={`nav-elements  ${showNavbar && 'active'}`}>
             <ul>
-              <li>Hello, {user.name}</li>
+            <li>Hello, {user.name}</li>
               <li>
                 <Link to="/" onClick={searchProperties}>
                   Home
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/filter">Filtered Results</Link>
               </li>
               <li>
@@ -46,7 +46,7 @@ const NavBar = ({ user, setUser, searchProperties }) => {
               </li>
               <li>
                 <Link to="/about">About</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/" onClick={handleLogOut}>
                   Log Out

@@ -1,5 +1,7 @@
 import React from "react";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
+import "./FilteredPage.css"
+import Footer from "../../components/Footer/Footer";
 
 const FilteredPage = ({ fifteenMinute, thirtyMinute, fortyFiveMinute, sixtyMinute }) => {
 
@@ -22,7 +24,7 @@ const FilteredPage = ({ fifteenMinute, thirtyMinute, fortyFiveMinute, sixtyMinut
     ));
 
     const fortyFiveMinuteDisplay = fortyFiveMinute.map((property) => (
-        <div >
+        <div>
             <p>{property.propertyData.address}</p>
             <p>{property.propertyData.purchase_price}</p>
             <p>{property.properties[0].travel_time}</p>
@@ -39,46 +41,78 @@ const FilteredPage = ({ fifteenMinute, thirtyMinute, fortyFiveMinute, sixtyMinut
         </div>
     ));
 
-    
-
-
-
-
     return (
-        <>      
-        {fifteenMinute.slice(0,10).map((property, index) => (
-           <PropertyCard
-            key={property.id}
-            propertyData={property.propertyData}
-            travelTime={property.properties[0].travel_time}
-            distance={property.properties[0].distance}
-            transportation={property.transportation}
-            // postcode={property.}
-          />
-          
-        ))}
-            {/* <div>
-               <h2>Cheapest 10 results within 15min travel time</h2>
-                {fifteenMinuteDisplay}
-            </div>
-
+        <div className="filterPage">
             <div>
-               <h2>Cheapest 10 results within 30min travel time</h2>
-                {fortyFiveMinuteDisplay}
+                <div className="headerBlock">
+                    <h1>15min travel radius</h1>
+                    <h3>The ten most affordable properties sold in March.</h3>
+                </div>
+                <div className="filterCard">
+                    {fifteenMinute.slice(0, 10).map((property, index) => (
+                        <PropertyCard
+                            key={property.id}
+                            propertyData={property.propertyData}
+                            travelTime={property.properties[0].travel_time}
+                            distance={property.properties[0].distance}
+                            transportation={property.transportation}
+                        />
+                    ))}
+                </div>
             </div>
-
             <div>
-               <h2>Cheapest 10 results within 45min travel time</h2>
-                {fortyFiveMinuteDisplay}
+                <div className="headerBlock">
+                    <h1>30min travel radius</h1>
+                    <h3>The ten most affordable properties sold in March.</h3>
+                </div>
+                <div className="filterCard">
+                    {thirtyMinute.slice(0, 10).map((property, index) => (
+                        <PropertyCard
+                            key={property.id}
+                            propertyData={property.propertyData}
+                            travelTime={property.properties[0].travel_time}
+                            distance={property.properties[0].distance}
+                            transportation={property.transportation}
+                        />
+                    ))}
+                </div>
             </div>
-
             <div>
-               <h2>Cheapest 10 results within 60min travel time</h2>
-                {sixtyMinuteDisplay}
-            </div> */}
-        </>
-
-    
+                <div className="headerBlock">
+                    <h1>45min travel radius</h1>
+                    <h3>The ten most affordable properties sold in March.</h3>
+                </div>
+                <div className="filterCard">
+                    {fortyFiveMinute.slice(0, 10).map((property, index) => (
+                        <PropertyCard
+                            key={property.id}
+                            propertyData={property.propertyData}
+                            travelTime={property.properties[0].travel_time}
+                            distance={property.properties[0].distance}
+                            transportation={property.transportation}
+                        />
+                    ))}
+                </div>
+            </div>
+            <div>
+                <div className="headerBlock">
+                    <h1>60min travel radius</h1>
+                    <h3>The ten most affordable properties sold in March.</h3>
+                </div>
+                <div className="filterCard">
+                    {sixtyMinute.slice(0, 10).map((property, index) => (
+                        <PropertyCard
+                            key={property.id}
+                            propertyData={property.propertyData}
+                            travelTime={property.properties[0].travel_time}
+                            distance={property.properties[0].distance}
+                            transportation={property.transportation}
+                        />
+                    ))}
+                </div>
+            </div>
+            <Footer />
+        </div>
     )
 };
 

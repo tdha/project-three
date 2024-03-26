@@ -24,37 +24,39 @@ function App() {
   };
 
   return (
-    <main className="App">
-      {user ? (
-        <>
-          <NavBar
-            user={user}
-            setUser={setUser}
-            searchProperties={searchProperties}
-          />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div className="center-searchPage">
-                  <HomePage search={search} sendInformation={sendInformation} />
-                </div>
-              }
+    <>
+      <main className="App">
+        {user ? (
+          <>
+            <NavBar
+              user={user}
+              setUser={setUser}
+              searchProperties={searchProperties}
             />
-            <Route
-              path="/filter"
-              element={
-                <div className="center-searchPage">
-                  <FilteredPage search={search} sendInformation={sendInformation} />
-                </div>
-              }
-            />
-          </Routes>
-        </>
-      ) : (
-        <AuthPage setUser={setUser} />
-      )}
-    </main>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <div>
+                    <HomePage search={search} sendInformation={sendInformation} />
+                  </div>
+                }
+              />
+              <Route
+                path="/filter"
+                element={
+                  <div>
+                    <FilteredPage search={search} sendInformation={sendInformation} />
+                  </div>
+                }
+              />
+            </Routes>
+          </>
+        ) : (
+          <AuthPage setUser={setUser} />
+        )}
+      </main>
+    </>
   );
 }
 

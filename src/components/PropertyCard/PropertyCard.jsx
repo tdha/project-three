@@ -44,7 +44,7 @@ const PropertyCard = ({
     <>
       <div className="property-card">
         <div className="property-image">
-          <img src="https://picsum.photos/500/200" alt="" />
+          <img src="https://picsum.photos/500/200/?random=1&blur=3" alt="" />
         </div>
         <div className="property-title">
           <h2>{propertyData.address}</h2>
@@ -52,9 +52,6 @@ const PropertyCard = ({
         </div>
         <div className="flex-items">
           <div className="property-details">
-            <p>
-              <strong>Property ID:</strong> {propertyData.property_id}
-            </p>
             <p>
               <strong>Purchase Price:</strong> {formattedValue}
             </p>
@@ -70,9 +67,12 @@ const PropertyCard = ({
             <p>
               <strong>Postcode:</strong> {propertyData.property_post_code}
             </p>
+            <p>
+              <strong>Property ID:</strong> {propertyData.property_id}
+            </p>
           </div>
           <div className="property-favorite">
-            <button>Favorite ★</button>
+            <button>★</button>
           </div>
         </div>
       </div>
