@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
- import ReactPaginate from 'react-paginate'; // this would not load (Dave)
+import ReactPaginate from 'react-paginate'; // this would not load (Dave)
 import './ResultPage.css';
 
 const ResultPage = ({ results }) => {
@@ -22,7 +22,7 @@ const ResultPage = ({ results }) => {
     .flatMap((result) => result.locations)
     .slice(indexOfFirstItem, indexOfLastItem);
 
-  // affordabilityChecker 
+  // affordabilityChecker
   const suburbPrices = currentItems.reduce((acc, property) => {
     const postcode = property.propertyData.property_post_code;
     if (!acc[postcode]) {
@@ -31,12 +31,6 @@ const ResultPage = ({ results }) => {
     acc[postcode].push(property.propertyData.purchase_price);
     return acc;
   }, {});
-
-
-  
-
-
-
 
   return (
     <>
