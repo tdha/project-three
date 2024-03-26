@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { properties } from '../../../seed';
-// import { RotatingTriangles } from 'react-loader-spinner'; // this would not load (Dave)
+import { RotatingTriangles } from 'react-loader-spinner';
 import ResultPage from '../ResultPage/ResultPage';
 import './HomePage.css';
 
-
-  
 const HomePage = ({ search, sendInformation }) => {
-  const [results, setResults] = useState([]);
   const [address1, setAddress1] = useState('');
   const [transportation, setTransportation] = useState('driving');
   const [mappedResults, setMappedResults] = useState([]);
@@ -34,18 +31,6 @@ const HomePage = ({ search, sendInformation }) => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const startingLocation = await fetchCoordinates(address1);
-
-    if (startingLocation) {
-      await fetchDistance(startingLocation, properties);
-    } else {
-      console.log('Failed to fetch coordinates for one or both addresses.');
-    }
-  };
-
   const fetchDistance = async (startingLocation, properties) => {
     const locationObjects = properties.map((property, index) => ({
       id: `other-location-${index}`,
@@ -54,6 +39,7 @@ const HomePage = ({ search, sendInformation }) => {
         lng: property.coordinates.lon,
       },
       propertyData: property,
+      transportation,
     }));
 
     const requestBody = {
@@ -95,7 +81,6 @@ const HomePage = ({ search, sendInformation }) => {
       });
 
       const data = await res.json();
-      
 
       const results = Array.isArray(data.results)
         ? data.results
@@ -119,31 +104,14 @@ const HomePage = ({ search, sendInformation }) => {
         };
       });
 
-
-      // affordabilityChecker 
-    // const suburbPrices = mappedResults.reduce((acc, property) => {
-    //   const postcode = property.propertyData.property_post_code;
-    //   if (!acc[postcode]) {
-    //     acc[postcode] = [];
-    //   }
-    //   acc[postcode].push(property.propertyData.purchase_price);
-    //   return acc;
-    //   }, {});
-    // console.log(suburbPrices)      
-
-
      console.log(mappedResults);
-      setResults(mappedResults)    
-
-
+      setResults(mappedResults)
       
     } catch (error) {
       console.error('Error fetching distance:', error);
     }
   };
-
-  
-
+   
 
   function showResults(results) {
     let tenMinuteArray = [];
@@ -173,7 +141,9 @@ const HomePage = ({ search, sendInformation }) => {
     console.log('30min', thirtyMinuteArray);
   }
   
-    
+  
+
+  
   
 
   return (
@@ -219,9 +189,8 @@ const HomePage = ({ search, sendInformation }) => {
           ) : null}
         </div>
       </div>
-      {search && <ResultPage results={mappedResults} suburbPrices={suburbPrices}/>}
+      {search && <ResultPage results={mappedResults} />}
     </>
-    )
+  );
 };
-
 export default HomePage;
