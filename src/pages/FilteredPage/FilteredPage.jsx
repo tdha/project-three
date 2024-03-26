@@ -2,10 +2,10 @@ import React from "react";
 
 const FilteredPage = ({ results  }) => {
     
- console.log(results);
-    const fifteenMinuteDisplay = results.flatMap((property) => (
-        <div>{property.propertyData.address}</div>
-    ));
+//  console.log(results);
+//     const fifteenMinuteDisplay = results.flatMap((property) => (
+//         <div>{property.propertyData.address}</div>
+//     ));
     
     // const fifteenMinuteDisplay = fifteenMinute.map(property => (
     //     <div>{property.propertyData.address}</div>
@@ -25,12 +25,9 @@ const FilteredPage = ({ fifteenMinute, setFifteenMinute }) => {
             </div>
         </>
 
-        <h1>
-         FilteredPage 
-         {console.log(fifteenMinute)};
-        </h1>
+    
     )
-};
+}};
 
 export default FilteredPage;
 
