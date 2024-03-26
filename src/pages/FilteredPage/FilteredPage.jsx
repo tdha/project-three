@@ -14,6 +14,11 @@ const FilteredPage = ({ fifteenMinute }) => {
     const travelTimes = fifteenMinute.map(property => property.properties[0].travel_time);
     console.log(travelTimes);
 
+    
+
+
+
+
     return (
         <>      
         {fifteenMinute.map(property => 
