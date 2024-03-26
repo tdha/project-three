@@ -88,7 +88,7 @@ const SearchLocationPage = () => {
   };
   return (
     <div className="search-container">
-      <h2>Address Distance Calculator</h2>
+      <h2 className='search-heading'>Address Distance Calculator</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="address1">Address 1:</label>
         <input
