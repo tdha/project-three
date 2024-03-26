@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import ReactPaginate from 'react-paginate'; // this would not load (Dave)
 import './ResultPage.css';
@@ -6,6 +6,8 @@ import './ResultPage.css';
 const ResultPage = ({ results }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 12;
+  const [postcodeAverages, setPostcodeAverages] = useState([]);
+
 
   const pageCount = Math.ceil(
     results.flatMap((result) => result.locations).length / itemsPerPage
@@ -23,48 +25,60 @@ const ResultPage = ({ results }) => {
     .slice(indexOfFirstItem, indexOfLastItem);
 
   // affordabilityChecker
-  const suburbPrices = results.flatMap(result => 
-    result.locations.reduce((acc, property) => {
-      const postcode = property.propertyData.property_post_code;
-      if (!acc[postcode]) {
-        acc[postcode] = [];
-      }
-      acc[postcode].push(property.propertyData.purchase_price);
-      return acc;
-    }, {})  
-  );
+     
 
-  // Remove '0' layer from results
-    const noZeroLayer = suburbPrices['0'];
-    console.log('noZeroLayer', noZeroLayer);    
 
-// Function to calculate average
-    function calculateAverage(prices) {
-      const sum = prices.reduce((acc, price) => acc + price, 0);
-      return sum / prices.length;
-    }
     
     // Iterate over postcode keys
-    for (const postcode in noZeroLayer) {
-      if (noZeroLayer.hasOwnProperty(postcode)) {
-        const prices = noZeroLayer[postcode];
-        const averagePrice = calculateAverage(prices);
-        console.log(`Average price for postcode ${postcode}: ${averagePrice}`);
-      }
-    }
+    useEffect(() => {
+        const calculateAverages = () => {
+          const averages = [];
+          for (const postcode in suburbPrices) {
+            if (suburbPrices.hasOwnProperty(postcode)) {
+              const prices = suburbPrices[postcode];
+              const sum = prices.reduce((acc, price) => acc + price, 0 );
+              const averagePrice = sum /prices.length;
+              averages.push({postcode, averagePrice})
 
+
+              //format average prices to $000,000
+              // const formattedAveragePrice = averagePrice.toLocaleString('en-US', {
+              //   style: 'currency',
+              //   currency: 'AUD',
+              //   minimumFractionDigits: 0,
+              //   maximumFractionDigits: 0,
+              // });
+              
+              // console.log(`Average price for postcode ${postcode}: ${averagePrice}`);
+            }
+          }
+          console.log('Averages array', averages)          
+          setPostcodeAverages(averages)
+        }
+        
+
+      const layeredSuburbPrices = results.flatMap(result => 
+        result.locations.reduce((acc, property) => {
+          const postcode = property.propertyData.property_post_code;
+          if (!acc[postcode]) {
+            acc[postcode] = [];
+          }
+          acc[postcode].push(property.propertyData.purchase_price);
+          return acc;
+        }, {})  
+      );
     
-  // Calculate average prices for each suburb
-  // const averagePrices = {};
-  // for (const [postcode, prices] of Object.entries(suburbPrices)) {
-  //   const averagePrice = prices.reduce((acc, price) => acc + price, 0) / prices.length;
-  //   averagePrices[postcode] = averagePrice;
-  // }
+      // Remove '0' layer from results
+        const suburbPrices = layeredSuburbPrices['0'];
+        // console.log('suburbPrices', suburbPrices); 
 
+        calculateAverages();
 
-
-  console.log('Suburb Prices:', suburbPrices );
-  console.log('Suburb Prices lengths:', suburbPrices[0].length );
+        // console.log('Suburb Prices:', layeredSuburbPrices );
+        console.log('postcode Averages:', postcodeAverages);
+    }, [results])
+  
+  
   // console.log('Suburb Average Prices:', averagePrices );
 
 

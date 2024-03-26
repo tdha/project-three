@@ -39,6 +39,11 @@ const FilteredPage = ({ fifteenMinute, thirtyMinute, fortyFiveMinute, sixtyMinut
         </div>
     ));
 
+    
+
+
+
+
     return (
         <>      
         {fifteenMinute.slice(0,10).map((property, index) => (
