@@ -191,7 +191,10 @@ const HomePage = ({ search, sendInformation }) => {
                             <option value="walking">Walking</option>
                         </select>
                         <button className="button-search" type="submit">
-                            Calculate Distance
+                            Show all results
+                        </button>
+                        <button className="button-search" type="submit">
+                            Show filtered results
                         </button>
                     </form>
                     <div className="loading">
@@ -209,6 +212,7 @@ const HomePage = ({ search, sendInformation }) => {
                     </div>
                 </div>
             ) : (
+                
                 <ResultPage results={mappedResults} />
             )}
         </>

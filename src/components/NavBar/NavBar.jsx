@@ -36,7 +36,7 @@ const NavBar = ({ user, setUser, searchProperties }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/blog">Blog</Link>
+                <Link to="/filter">Filtered Results</Link>
               </li>
               <li>
                 <Link to="/projects">Projects</Link>
