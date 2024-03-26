@@ -223,7 +223,7 @@ const HomePage = ({ search, sendInformation }) => {
                 </div>
             ) : (
                 // <ResultPage results={mappedResults} />
-                <FilteredPage fifteenMinute={fifteenMinute} />
+                <FilteredPage fifteenMinuteArray={fifteenMinute} />
             )}
         </>
     );
