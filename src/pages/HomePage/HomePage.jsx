@@ -3,8 +3,10 @@ import { properties } from '../../../seed';
 import { RotatingTriangles } from 'react-loader-spinner';
 import ResultPage from '../ResultPage/ResultPage';
 import './HomePage.css';
+import FilteredPage from '../FilteredPage/FilteredPage'
 
 const HomePage = ({ search, sendInformation }) => {
+    const [fifteenMinute, setFifteenMinute] = useState([]);
     const [address1, setAddress1] = useState('');
     const [transportation, setTransportation] = useState('driving');
     const [mappedResults, setMappedResults] = useState([]);
@@ -138,7 +140,7 @@ const HomePage = ({ search, sendInformation }) => {
                     })
                 )
             );
-
+                    setFifteenMinute(fifteenMinuteArray);
             console.log('15min', fifteenMinuteArray);
             console.log('30min', thirtyMinuteArray);
             console.log('45min', fortyfiveMinuteArray);
@@ -158,7 +160,7 @@ const HomePage = ({ search, sendInformation }) => {
             setIsLoading(false);
             sendInformation();
 
-            showResults(mappedResults);
+            // showResults(mappedResults);
 
         } else {
             console.log('Failed to fetch coordinates for one or both addresses.');
@@ -191,11 +193,11 @@ const HomePage = ({ search, sendInformation }) => {
                             <option value="walking">Walking</option>
                         </select>
                         <button className="button-search" type="submit">
-                            Show all results
+                            Show results
                         </button>
-                        <button className="button-search" type="submit">
+                        {/* <button className="button-search" type="submit">
                             Show filtered results
-                        </button>
+                        </button> */}
                     </form>
                     <div className="loading">
                         {isLoading ? (
@@ -212,8 +214,8 @@ const HomePage = ({ search, sendInformation }) => {
                     </div>
                 </div>
             ) : (
-                
-                <ResultPage results={mappedResults} />
+                // <ResultPage results={mappedResults} />
+                <FilteredPage results={fifteenMinute} />
             )}
         </>
     );
