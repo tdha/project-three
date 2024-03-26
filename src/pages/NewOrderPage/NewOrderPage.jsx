@@ -1,7 +1,7 @@
 const NewOrderPage = () => {
     return (
         <h1>
-            NewOrderPage
+            NewOrderPage!!
         </h1>
     )
 };

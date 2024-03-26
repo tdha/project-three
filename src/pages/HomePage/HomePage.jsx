@@ -7,6 +7,9 @@ import FilteredPage from '../FilteredPage/FilteredPage'
 
 const HomePage = ({ search, sendInformation }) => {
     const [fifteenMinute, setFifteenMinute] = useState([]);
+    const [thirtyMinute, setThirtyMinute] = useState([]);
+    const [fortyFiveMinute, setFortyFiveMinute] = useState([]);
+    const [sixtyMinute, setSixtyMinute] = useState ([])
     const [address1, setAddress1] = useState('');
     const [transportation, setTransportation] = useState('driving');
     const [mappedResults, setMappedResults] = useState([]);
@@ -120,27 +123,32 @@ const HomePage = ({ search, sendInformation }) => {
 
             mappedResults.forEach(result =>
                 result.locations.forEach(location =>
-                    location.properties.forEach(element => {
-                        if (element.travel_time < 900) {
-                            fifteenMinuteArray = fifteenMinuteArray.slice(0, 9);
+                    location.properties.forEach((a) => {
+                        if (a.travel_time < 900) {
+                            
                             fifteenMinuteArray.push(location);
-                        } else if (element.travel_time >= 900 && element.travel_time < 1800) {
-                            if (thirtyMinuteArray.length < 10) {
-                                thirtyMinuteArray.push(location);
-                            }
-                        } else if (element.travel_time >= 1800 && element.travel_time < 2700) {
-                            if (fortyfiveMinuteArray.length < 10) {
-                                fortyfiveMinuteArray.push(location);
-                            }
-                        } else if (element.travel_time >= 2700 && element.travel_time < 3600) {
-                            if (sixtyMinuteArray.length < 10) {
-                                sixtyMinuteArray.push(location);
-                            }
+                            fifteenMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);
+                            
+                        } else if (a.travel_time >= 900 && a.travel_time < 1800) {
+                            
+                            thirtyMinuteArray.push(location);
+                            thirtyMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);
+                            
+                        } else if (a.travel_time >= 1800 && a.travel_time < 2700) {
+                            
+                            fortyfiveMinuteArray.push(location);
+                            fortyfiveMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);
+                            
+                        } else if (a.travel_time >= 2700 && a.travel_time < 3600) {
+                            
+                            sixtyMinuteArray.push(location);
+                            sixtyMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);
+                            
                         }
                     })
                 )
             );
-                    setFifteenMinute(fifteenMinuteArray);
+            setFifteenMinute(fifteenMinuteArray);
             console.log('15min', fifteenMinuteArray);
             console.log('30min', thirtyMinuteArray);
             console.log('45min', fortyfiveMinuteArray);
@@ -215,7 +223,7 @@ const HomePage = ({ search, sendInformation }) => {
                 </div>
             ) : (
                 // <ResultPage results={mappedResults} />
-                <FilteredPage results={fifteenMinute} />
+                <FilteredPage fifteenMinuteArray={fifteenMinute} />
             )}
         </>
     );
