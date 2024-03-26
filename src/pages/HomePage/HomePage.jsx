@@ -149,10 +149,13 @@ const HomePage = ({ search, sendInformation }) => {
                 )
             );
             setFifteenMinute(fifteenMinuteArray);
-            console.log('15min', fifteenMinuteArray);
-            console.log('30min', thirtyMinuteArray);
-            console.log('45min', fortyfiveMinuteArray);
-            console.log('60min', sixtyMinuteArray);
+            setThirtyMinute(thirtyMinuteArray);
+            setFortyFiveMinute(fortyfiveMinuteArray);
+            setSixtyMinute(sixtyMinuteArray);
+            // console.log('15min', fifteenMinuteArray);
+            // console.log('30min', thirtyMinuteArray);
+            // console.log('45min', fortyfiveMinuteArray);
+            // console.log('60min', sixtyMinuteArray);
         }
         showResults(mappedResults);
     }, [mappedResults])
@@ -223,7 +226,8 @@ const HomePage = ({ search, sendInformation }) => {
                 </div>
             ) : (
                 // <ResultPage results={mappedResults} />
-                <FilteredPage fifteenMinuteArray={fifteenMinute} />
+                <FilteredPage fifteenMinute={fifteenMinute} thirtyMinute={thirtyMinute} 
+                fortyFiveMinute={fortyFiveMinute} sixtyMinute={sixtyMinute} />
             )}
         </>
     );
