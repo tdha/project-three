@@ -23,14 +23,50 @@ const ResultPage = ({ results }) => {
     .slice(indexOfFirstItem, indexOfLastItem);
 
   // affordabilityChecker
-  const suburbPrices = currentItems.reduce((acc, property) => {
-    const postcode = property.propertyData.property_post_code;
-    if (!acc[postcode]) {
-      acc[postcode] = [];
+  const suburbPrices = results.flatMap(result => 
+    result.locations.reduce((acc, property) => {
+      const postcode = property.propertyData.property_post_code;
+      if (!acc[postcode]) {
+        acc[postcode] = [];
+      }
+      acc[postcode].push(property.propertyData.purchase_price);
+      return acc;
+    }, {})  
+  );
+
+  // Remove '0' layer from results
+    const noZeroLayer = suburbPrices['0'];
+    console.log('noZeroLayer', noZeroLayer);    
+
+// Function to calculate average
+    function calculateAverage(prices) {
+      const sum = prices.reduce((acc, price) => acc + price, 0);
+      return sum / prices.length;
     }
-    acc[postcode].push(property.propertyData.purchase_price);
-    return acc;
-  }, {});
+    
+    // Iterate over postcode keys
+    for (const postcode in noZeroLayer) {
+      if (noZeroLayer.hasOwnProperty(postcode)) {
+        const prices = noZeroLayer[postcode];
+        const averagePrice = calculateAverage(prices);
+        console.log(`Average price for postcode ${postcode}: ${averagePrice}`);
+      }
+    }
+
+    
+  // Calculate average prices for each suburb
+  // const averagePrices = {};
+  // for (const [postcode, prices] of Object.entries(suburbPrices)) {
+  //   const averagePrice = prices.reduce((acc, price) => acc + price, 0) / prices.length;
+  //   averagePrices[postcode] = averagePrice;
+  // }
+
+
+
+  console.log('Suburb Prices:', suburbPrices );
+  console.log('Suburb Prices lengths:', suburbPrices[0].length );
+  // console.log('Suburb Average Prices:', averagePrices );
+
 
   return (
     <>
