@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { properties } from '../../../seed';
-// import { RotatingTriangles } from 'react-loader-spinner'; // this would not load (Dave)
+import { RotatingTriangles } from 'react-loader-spinner'; // this would not load (Dave)
 import ResultPage from '../ResultPage/ResultPage';
 import './HomePage.css';
 
