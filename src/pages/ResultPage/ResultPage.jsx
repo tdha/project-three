@@ -22,19 +22,7 @@ const ResultPage = ({ results }) => {
     .flatMap((result) => result.locations)
     .slice(indexOfFirstItem, indexOfLastItem);
 
-  // affordabilityChecker 
-  const suburbPrices = currentItems.reduce((acc, property) => {
-    const postcode = property.propertyData.property_post_code;
-    if (!acc[postcode]) {
-      acc[postcode] = [];
-    }
-    acc[postcode].push(property.propertyData.purchase_price);
-    return acc;
-  }, {});
-
-
-  
-
+ 
 
 
 

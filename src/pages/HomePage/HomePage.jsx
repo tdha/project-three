@@ -119,14 +119,31 @@ const HomePage = ({ search, sendInformation }) => {
         };
       });
 
+
+      // affordabilityChecker 
+    // const suburbPrices = mappedResults.reduce((acc, property) => {
+    //   const postcode = property.propertyData.property_post_code;
+    //   if (!acc[postcode]) {
+    //     acc[postcode] = [];
+    //   }
+    //   acc[postcode].push(property.propertyData.purchase_price);
+    //   return acc;
+    //   }, {});
+    // console.log(suburbPrices)      
+
+
      console.log(mappedResults);
-      setResults(mappedResults)
+      setResults(mappedResults)    
+
+
       
     } catch (error) {
       console.error('Error fetching distance:', error);
     }
   };
-   
+
+  
+
 
   function showResults(results) {
     let tenMinuteArray = [];
@@ -156,9 +173,7 @@ const HomePage = ({ search, sendInformation }) => {
     console.log('30min', thirtyMinuteArray);
   }
   
-  
-
-  
+    
   
 
   return (
@@ -204,7 +219,7 @@ const HomePage = ({ search, sendInformation }) => {
           ) : null}
         </div>
       </div>
-      {search && <ResultPage results={mappedResults} />}
+      {search && <ResultPage results={mappedResults} suburbPrices={suburbPrices}/>}
     </>
     )
 };
