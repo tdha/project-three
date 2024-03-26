@@ -9,7 +9,9 @@ const HomePage = ({ search, sendInformation }) => {
     const [fifteenMinute, setFifteenMinute] = useState([]);
     const [thirtyMinute, setThirtyMinute] = useState([]);
     const [fortyFiveMinute, setFortyFiveMinute] = useState([]);
-    const [sixtyMinute, setSixtyMinute] = useState ([])
+    const [sixtyMinute, setSixtyMinute] = useState ([]);
+    const [seventyFiveMinute, setSeventyFiveMinute] = useState ([]);
+    const [ninetyMinute, setNinetyMinute] = useState ([]);
     const [address1, setAddress1] = useState('');
     const [transportation, setTransportation] = useState('driving');
     const [mappedResults, setMappedResults] = useState([]);
@@ -121,8 +123,10 @@ const HomePage = ({ search, sendInformation }) => {
         async function showResults(mappedResults) {
             let fifteenMinuteArray = [];
             let thirtyMinuteArray = [];
-            let fortyfiveMinuteArray = [];
+            let fortyFiveMinuteArray = [];
             let sixtyMinuteArray = [];
+            let seventyFiveMinuteArray = [];
+            let ninetyMinuteArray = [];
 
             mappedResults.forEach(result =>
                 result.locations.forEach(location =>
@@ -139,8 +143,8 @@ const HomePage = ({ search, sendInformation }) => {
                             
                         } else if (a.travel_time >= 1800 && a.travel_time < 2700) {
                             
-                            fortyfiveMinuteArray.push(location);
-                            fortyfiveMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);
+                            fortyFiveMinuteArray.push(location);
+                            fortyFiveMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);
                             
                         } else if (a.travel_time >= 2700 && a.travel_time < 3600) {
                             
@@ -148,18 +152,32 @@ const HomePage = ({ search, sendInformation }) => {
                             sixtyMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);
                             
                         }
+                         else if (a.travel_time >= 3600 && a.travel_time < 4500) {
+                            
+                            seventyFiveMinuteArray.push(location);
+                            seventyFiveMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);
+                            
+                        }
+                         else if (a.travel_time >= 4500 && a.travel_time < 5400) {
+                            
+                            ninetyMinuteArray.push(location);
+                            ninetyMinuteArray.sort((a, b) => a.propertyData.purchase_price - b.propertyData.purchase_price);                            
+                        }
                     })
                 )
             );
             setFifteenMinute(fifteenMinuteArray);
             setThirtyMinute(thirtyMinuteArray);
-            setFortyFiveMinute(fortyfiveMinuteArray);
+            setFortyFiveMinute(fortyFiveMinuteArray);
             setSixtyMinute(sixtyMinuteArray);
+            setSeventyFiveMinute(seventyFiveMinuteArray);
+            setNinetyMinute(ninetyMinuteArray);
             // console.log('15min', fifteenMinuteArray);
             // console.log('30min', thirtyMinuteArray);
             // console.log('45min', fortyfiveMinuteArray);
             // console.log('60min', sixtyMinuteArray);
         }
+
         showResults(mappedResults);
     }, [mappedResults])
 
@@ -249,7 +267,8 @@ const HomePage = ({ search, sendInformation }) => {
             ) : (
                 // <ResultPage results={mappedResults} />
                 <FilteredPage fifteenMinute={fifteenMinute} thirtyMinute={thirtyMinute} 
-                fortyFiveMinute={fortyFiveMinute} sixtyMinute={sixtyMinute} />
+                fortyFiveMinute={fortyFiveMinute} sixtyMinute={sixtyMinute} 
+                seventyFiveMinute={seventyFiveMinute} ninetyMinute={ninetyMinute}/>
             )}
         </>
     );
