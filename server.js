@@ -18,6 +18,10 @@ const ensureLoggedIn = require('./config/ensureLoggedIn');
 app.use('/api/users', require('./routes/api/users')); // Put API routes here, before the 'catch all' route
 app.use('/api/properties', ensureLoggedIn, require('./routes/api/properties'));
 
+app.get('/api/api-key', (req, res) => {
+  res.json({ apiKey: process.env.API_KEY });
+});
+
 app.get('/*', function (req, res) {
   // respond to paths we don't recognise by sending the React index.html
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));

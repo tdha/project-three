@@ -1,6 +1,8 @@
 import './PropertyCard.css';
 import axios from 'axios';
 import { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PropertyCard = ({
   propertyData,
@@ -54,11 +56,11 @@ const PropertyCard = ({
           },
         }
       );
-      alert('Property added to favorites successfully!');
+      toast.success('Property added to favorites successfully!');
     } catch (error) {
       setIsButtonDisabled(false);
       console.error('Error adding property to favorites:', error);
-      alert('Error adding property to favorites. Please try again.');
+      toast.error('Error adding property to favorites. Please try again.');
     }
   };
 
@@ -115,6 +117,14 @@ const PropertyCard = ({
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        closeOnClick={true}
+        pauseOnHover={false}
+        draggable={true}
+      />
     </>
   );
 };

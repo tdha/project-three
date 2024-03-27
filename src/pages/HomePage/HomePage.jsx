@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { properties } from '../../../seed';
 import { RotatingTriangles } from 'react-loader-spinner';
 import './HomePage.css';
 import FilteredPage from '../FilteredPage/FilteredPage';
+import axios from 'axios';
 
 const HomePage = ({ search, sendInformation }) => {
   const [fifteenMinute, setFifteenMinute] = useState([]);
@@ -14,6 +15,20 @@ const HomePage = ({ search, sendInformation }) => {
   const [mappedResults, setMappedResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [propertyType, setPropertyType] = useState('all');
+
+  const apiKeyRef = useRef('');
+  useEffect(() => {
+    const fetchApiKey = async () => {
+      try {
+        const response = await axios.get('/api/api-key');
+        apiKeyRef.current = response.data.apiKey;
+      } catch (error) {
+        console.error('Error fetching API key:', error);
+      }
+    };
+
+    fetchApiKey();
+  }, []);
 
   const fetchCoordinates = async (address) => {
     const apiUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
@@ -80,7 +95,7 @@ const HomePage = ({ search, sendInformation }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-Api-Key': process.env.API_KEY,
+          'X-Api-Key': apiKeyRef.current,
           'X-Application-Id': 'e9f7d35c',
         },
         body: JSON.stringify(requestBody),
