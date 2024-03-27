@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import './SearchLocationPage.css';
 const SearchLocationPage = () => {
-  
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
-  const [distance, setDistance] = useState(null);
   const [transportation, setTransportation] = useState('driving');
   const fetchCoordinates = async (address) => {
     const apiUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
@@ -88,7 +86,7 @@ const SearchLocationPage = () => {
   };
   return (
     <div className="search-container">
-      <h2 className='search-heading'>Address Distance Calculator</h2>
+      <h2 className="search-heading">Address Distance Calculator</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="address1">Address 1:</label>
         <input

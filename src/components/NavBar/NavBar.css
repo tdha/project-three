@@ -14,7 +14,6 @@
   height: 60px;
   background-color: #f9f9f94e;
   position: relative;
-  margin-bottom: 2rem;
 }
 
 .menu-icon {
@@ -38,13 +37,13 @@
   text-decoration: none;
 }
 
-.nav-elements ul a.active {
+.nav-elements ul a.active-navbar {
   color: rgb(13, 13, 13);
   font-weight: 500;
   position: relative;
 }
 
-.nav-elements ul a.active::after {
+.nav-elements ul a.active-navbar::after {
   content: '';
   position: absolute;
   bottom: -4px;
@@ -66,18 +65,23 @@
     cursor: pointer;
   }
 
+  .navbar {
+    background-color: #7eaedb;
+  }
+
   .nav-elements {
     position: absolute;
     right: 0;
     top: 60px;
-    background-color: #ffffff8c;
+    background-color: #7eaedb;
     width: 0px;
     height: calc(100vh - 60px);
     transition: all 0.3s ease-in;
     overflow: hidden;
+    z-index: 1;
   }
 
-  .nav-elements.active {
+  .nav-elements.active-navbar {
     width: 270px;
   }
 
@@ -89,6 +93,15 @@
   .nav-elements ul li {
     margin-top: 22px;
     display: flex;
+  }
+
+  .nav-elements ul li::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 10px;
   }
 }
 

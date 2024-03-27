@@ -5,12 +5,11 @@
 
 .App {
   height: 100vh;
-  margin: 0 100px;
 }
 
 .center-searchPage {
   /*-60px because it's the height of the navbar;*/
-  height: calc(100vh - 120px);
+  height: calc(100vh - 60px);
   display: flex;
   align-items: center;
 }

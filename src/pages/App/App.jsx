@@ -37,8 +37,11 @@ function App() {
               <Route
                 path="/"
                 element={
-                  <div>
-                    <HomePage search={search} sendInformation={sendInformation} />
+                  <div className="center-searchPage">
+                    <HomePage
+                      search={search}
+                      sendInformation={sendInformation}
+                    />
                   </div>
                 }
               />
@@ -46,7 +49,10 @@ function App() {
                 path="/filter"
                 element={
                   <div>
-                    <FilteredPage search={search} sendInformation={sendInformation} />
+                    <FilteredPage
+                      search={search}
+                      sendInformation={sendInformation}
+                    />
                   </div>
                 }
               />

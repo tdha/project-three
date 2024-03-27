@@ -19,38 +19,35 @@ h3 {
 }
 
 p {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .filterPage {
-    height: calc(100vh - 60px);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* flex-wrap: wrap; */
-    /* justify-content: center; */
-    /* gap: 1rem; */
-  }
+  height: calc(100vh - 60px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
-  .filterCard {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1.4rem;
-    justify-content: center;
-  }
+.filterCard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  justify-content: center;
+}
 
-  .headerBlock {
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 2rem 0 2rem 0;
-    margin: 2rem 1rem 1rem 1rem;
-  }
+.headerBlock {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 2rem 0 2rem 0;
+  margin: 0 0 1rem 0;
+}
 
-  .footer {
-    display: block;
-    margin-top: 100px;
-    padding-bottom: 100px;
-    text-align: center;
-    color: white;
-  }
+.footer {
+  display: block;
+  margin-top: 100px;
+  padding-bottom: 100px;
+  text-align: center;
+  color: white;
+}
