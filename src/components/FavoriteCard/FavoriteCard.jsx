@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FavoriteCard = ({
   propertyData,
@@ -36,6 +38,7 @@ const FavoriteCard = ({
 
   const removeFromFavorites = async () => {
     try {
+      toast.info('Deleting property');
       const token = localStorage.getItem('token');
       const response = await axios.delete(
         `/api/properties/${propertyData.property_id}`,
@@ -45,12 +48,11 @@ const FavoriteCard = ({
           },
         }
       );
-      console.log('Property deleted successfully:', response.data);
       if (response.status === 200) {
         window.location.reload();
       }
     } catch (error) {
-      console.error('Error deleting property:', error);
+      toast.error('Error deleting property');
     }
   };
 
@@ -101,6 +103,14 @@ const FavoriteCard = ({
           <button onClick={removeFromFavorites}>Remove</button>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        closeOnClick={true}
+        pauseOnHover={false}
+        draggable={true}
+      />
     </div>
   );
 };
