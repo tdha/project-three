@@ -1,4 +1,6 @@
 import './PropertyCard.css';
+import axios from 'axios';
+import { useState } from 'react';
 
 const PropertyCard = ({
   propertyData,
@@ -6,6 +8,7 @@ const PropertyCard = ({
   distance,
   transportation,
 }) => {
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   function secondsToTime(seconds) {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -33,6 +36,31 @@ const PropertyCard = ({
   });
 
   const distanceInKilometers = distance / 1000;
+
+  const handleAddToFavorites = async () => {
+    try {
+      setIsButtonDisabled(true);
+      propertyData.travelTime = travelTime;
+      propertyData.distance = distance;
+      propertyData.transportation = transportation;
+      const token = localStorage.getItem('token');
+      await axios.post(
+        '/api/properties/addFavoriteProperty',
+        { propertyData },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      alert('Property added to favorites successfully!');
+    } catch (error) {
+      setIsButtonDisabled(false);
+      console.error('Error adding property to favorites:', error);
+      alert('Error adding property to favorites. Please try again.');
+    }
+  };
 
   return (
     <>
@@ -74,7 +102,16 @@ const PropertyCard = ({
             </p>
           </div>
           <div className="property-favorite">
-            <button>★</button>
+            <button
+              onClick={() =>
+                handleAddToFavorites({
+                  propertyData,
+                })
+              }
+              disabled={isButtonDisabled}
+            >
+              ★
+            </button>
           </div>
         </div>
       </div>

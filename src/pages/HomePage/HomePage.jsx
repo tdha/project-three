@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { properties } from '../../../seed';
 import { RotatingTriangles } from 'react-loader-spinner';
-import ResultPage from '../ResultPage/ResultPage';
 import './HomePage.css';
 import FilteredPage from '../FilteredPage/FilteredPage';
 
