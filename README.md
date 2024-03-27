@@ -1,4 +1,5 @@
 # Project3: Real Estate Price/Distance aggregator
+## Prepared by Ton Ha, Alan Santos, David Burt & Ross Ritchie
 
 * This app allows the user to input the location of a point of interest (e.g. place of work), it will then look up recent property sales, sort them by price and display them according to whether they are with 15 minutes, 30 minutes, 45 minutes and an hour's travel time from the user's place of interest.
 * The user has the option of personalising their search by choosing their mode of transport and calulcates the travel time radius accordingly.
@@ -13,12 +14,18 @@
 ![home page](Readme_imgs/Home_page.png) 
 ![results page](Readme_imgs/Results.png) 
 
-## Technologies used
+## Technologies used: 
 * JavaScript
 * HTML 
 * CSS
+* MongoDb
 * Express
-* Google 0Auth
+* React
+* Node.js
+
+## APIs used:
+* ![Traveltime](https://traveltime.com/)
+* ![Openstreetmap](https://www.openstreetmap.org/)
 
 ## Getting 
 * App not yet deployed - start-up on computer in the meantime
@@ -29,7 +36,10 @@
 * Review results
 
 ## Next steps
+* Show results on a map
 * Update styling 
 * Identify the suburb with the lowest average price that is within each travel time radius
 * Update property data to include Central Coast and wollongong areas
+* Ability for users to save a favourite property search
+
 
