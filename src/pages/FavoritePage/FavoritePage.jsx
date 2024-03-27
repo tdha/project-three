@@ -6,6 +6,8 @@ import { RotatingTriangles } from 'react-loader-spinner';
 const FavoritePage = () => {
   const [favoriteProperties, setFavoriteProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,6 +21,8 @@ const FavoritePage = () => {
         setIsLoading(false);
       } catch (error) {
         console.log(error);
+        setIsLoading(false);
+        setError(true);
       }
     };
 
@@ -28,7 +32,19 @@ const FavoritePage = () => {
   return (
     <>
       <div className="center-favorites">
-        {!isLoading ? (
+        {isLoading ? (
+          <RotatingTriangles
+            visible={true}
+            height="160"
+            width="160"
+            color="blue"
+            ariaLabel="rotating-triangles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        ) : error ? (
+          <p className="favorites-error">No favorites found.</p>
+        ) : (
           favoriteProperties.map((property) => (
             <FavoriteCard
               key={property._id}
@@ -48,16 +64,6 @@ const FavoritePage = () => {
               transportation={property.transportation}
             />
           ))
-        ) : (
-          <RotatingTriangles
-            visible={true}
-            height="160"
-            width="160"
-            color="blue"
-            ariaLabel="rotating-triangles-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-          />
         )}
       </div>
     </>

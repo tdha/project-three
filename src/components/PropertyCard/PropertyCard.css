@@ -80,3 +80,10 @@
 .margin-card {
   margin-top: 1rem;
 }
+
+.favorites-error {
+  border-radius: 10px;
+  padding: 4rem;
+  background-color: rgba(255, 255, 255, 0.707);
+  font-size: 2rem;
+}
