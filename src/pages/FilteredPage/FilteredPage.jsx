@@ -40,7 +40,7 @@ const FilteredPage = ({
       <div>
         <div className="headerBlock">
           <h1>15min travel radius</h1>
-          <h3>The ten most affordable properties sold in March.</h3>
+          <h3>The most affordable properties sold in March.</h3>
         </div>
         <div className="filterCard">
           {fifteenMinute.slice(0, totalItems).map((property, index) => (
@@ -57,7 +57,7 @@ const FilteredPage = ({
       <div>
         <div className="headerBlock">
           <h1>30min travel radius</h1>
-          <h3>The ten most affordable properties sold in March.</h3>
+          <h3>The most affordable properties sold in March.</h3>
         </div>
         <div className="filterCard">
           {thirtyMinute.slice(0, totalItems).map((property, index) => (
@@ -74,7 +74,7 @@ const FilteredPage = ({
       <div>
         <div className="headerBlock">
           <h1>45min travel radius</h1>
-          <h3>The ten most affordable properties sold in March.</h3>
+          <h3>The most affordable properties sold in March.</h3>
         </div>
         <div className="filterCard">
           {fortyFiveMinute.slice(0, totalItems).map((property, index) => (
@@ -91,7 +91,7 @@ const FilteredPage = ({
       <div>
         <div className="headerBlock">
           <h1>60min travel radius</h1>
-          <h3>The ten most affordable properties sold in March.</h3>
+          <h3>The most affordable properties sold in March.</h3>
         </div>
         <div className="filterCard">
           {sixtyMinute.slice(0, totalItems).map((property, index) => (
