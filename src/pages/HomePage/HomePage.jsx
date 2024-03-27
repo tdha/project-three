@@ -80,7 +80,7 @@ const HomePage = ({ search, sendInformation }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-Api-Key': '516250a87ff7610e38bd9cc62982b57e',
+          'X-Api-Key': process.env.API_KEY,
           'X-Application-Id': 'e9f7d35c',
         },
         body: JSON.stringify(requestBody),
@@ -198,16 +198,16 @@ const HomePage = ({ search, sendInformation }) => {
     <>
       {!search ? (
         <div className="search-container">
-          <h2>Address Distance Calculator</h2>
+          <h2>Distance Calculator</h2>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="address1">Address 1:</label>
+            <label htmlFor="address1">Address:</label>
             <input
               id="address1"
               type="text"
               value={address1}
               onChange={(e) => setAddress1(e.target.value)}
               required
-              placeholder="Address 1"
+              placeholder="Address"
             />
             <label htmlFor="transportation">Transportation:</label>
             <select
@@ -233,9 +233,6 @@ const HomePage = ({ search, sendInformation }) => {
             <button className="button-search" type="submit">
               Show results
             </button>
-            {/* <button className="button-search" type="submit">
-                            Show filtered results
-                        </button> */}
           </form>
           <div className="loading">
             {isLoading ? (
