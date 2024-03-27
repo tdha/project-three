@@ -10,6 +10,7 @@ import HomePage from '../HomePage/HomePage';
 
 import NavBar from '../../components/NavBar/NavBar';
 import FilteredPage from '../FilteredPage/FilteredPage';
+import FavoritesPage from '../FavouritesPage/FavouritesPage';
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -50,8 +51,16 @@ function App() {
                   </div>
                 }
               />
+              <Route
+                path="/favorites"
+                element={
+                  <div>
+                    <FavoritesPage  />
+                  </div>
+                }
+              />
             </Routes>
-          </>
+            </>
         ) : (
           <AuthPage setUser={setUser} />
         )}

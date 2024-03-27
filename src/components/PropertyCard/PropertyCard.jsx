@@ -1,8 +1,9 @@
 import './PropertyCard.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { favorites } from '../../utilities/favorites-api';
 
 const PropertyCard = ({ propertyData,travelTime,distance,transportation,}) => { 
-  const [favorites, setFavorites] = useState ({
+  const [favorite, setFavorite] = useState ({
     address: "",
     purchasePrice: "",
     travelTime: "",
@@ -13,17 +14,32 @@ const PropertyCard = ({ propertyData,travelTime,distance,transportation,}) => {
   });
 
 
-  const _favouriteButton = (event) => {
+  const _favouriteButton = (address, purchasePrice, travelTime, distance, transportation, postCode, property, event) => {
     event.preventDefault();
-    setFavorites({
-      ...favorites,
-      [event.target.name]: event.target.value,
-    });
+    
+    const newFavorite = {
+      address,
+      purchasePrice,
+      travelTime,
+      distance,
+      transportation,
+      postCode,
+      property
+    };
+    setFavorite(newFavorite);
+    createFavorite(newFavorite)
   };
   
-  useEffect(() => {
-    console.log('Updated favorites:', favorites);
-  }, [favorites]);
+  const createFavorite = async (favorite) => {
+    try {
+      const formData = favorite;
+      const pushfavorite =  await favorites(formData);
+
+    } catch {
+      console.log('front end now worky');
+
+    }
+  };
   
 
   function secondsToTime(seconds) {
@@ -70,39 +86,40 @@ const PropertyCard = ({ propertyData,travelTime,distance,transportation,}) => {
             <img src="https://picsum.photos/500/200/?random=1&blur=3" alt="" />
           </div>
           <div className="property-title">
-            <input type="hidden" name="address" value={propertyData.address} />
+            {/* <input type="hidden" name="address" value={propertyData.address} /> */}
             <h2>{propertyData.address}</h2>
             <hr />
           </div>
           <div className="flex-items">
             <div className="property-details">
               <p>
-                <input type="hidden" name="purchasePrice" value={formattedValue} />
+                {/* <input type="hidden" name="purchasePrice" value={formattedValue} /> */}
                 <strong>Purchase Price:</strong> {formattedValue}
               </p>
               <p>
-                <input type="hidden" name="travelTime" value={secondsToTime(travelTime)} />
+                {/* <input type="hidden" name="travelTime" value={secondsToTime(travelTime)} /> */}
                 <strong>Travel Time:</strong> {secondsToTime(travelTime)}
               </p>
               <p>
-                <input type="hidden" name="distance" value={distanceInKilometers.toFixed(2)} />
+                {/* <input type="hidden" name="distance" value={distanceInKilometers.toFixed(2)} /> */}
                 <strong>Distance:</strong> {distanceInKilometers.toFixed(2)} Km
               </p>
               <p>
-                <input type="hidden" name="transportation" value={transportationType} />
+                {/* <input type="hidden" name="transportation" value={transportationType} /> */}
                 <strong>Transportation:</strong> {transportationType}
               </p>
               <p>
-                <input type="hidden" name="postcodeCode" value={propertyData.property_post_code} />
+                {/* <input type="hidden" name="postcodeCode" value={propertyData.property_post_code} /> */}
                 <strong>Postcode:</strong> {propertyData.property_post_code}
               </p>
               <p>
-                <input type="hidden" name="propertyId" value={propertyData.property_id} />
+                {/* <input type="hidden" name="propertyId" value={propertyData.property_id} /> */}
                 <strong>Property ID:</strong> {propertyData.property_id}
               </p>
             </div>
             <div className="property-favorite">
-              <button type="submit">★</button>
+              <button onClick={(event) => _favouriteButton(propertyData.address, formattedValue, secondsToTime(travelTime), distanceInKilometers.toFixed(2), 
+              transportationType, propertyData.property_post_code, propertyData.property_id, event)}>★</button>
             </div>
           </div>
         </div>

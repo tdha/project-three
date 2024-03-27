@@ -35,10 +35,10 @@ const NavBar = ({ user, setUser, searchProperties }) => {
                   Home
                 </Link>
               </li>
-              {/* <li>
-                <Link to="/filter">Filtered Results</Link>
+            <li>
+                <Link to="/favorites" >Favorites</Link>
               </li>
-              <li>
+               {/*  <li>
                 <Link to="/projects">Projects</Link>
               </li>
               <li>
