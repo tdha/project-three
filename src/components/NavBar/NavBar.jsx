@@ -36,6 +36,9 @@ const NavBar = ({ user, setUser, searchProperties }) => {
                 </Link>
               </li>
               <li>
+                <Link to="/favorites">Favorites</Link>
+              </li>
+              <li>
                 <Link to="/" onClick={handleLogOut}>
                   Log Out
                 </Link>

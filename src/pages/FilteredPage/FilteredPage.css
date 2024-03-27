@@ -51,3 +51,14 @@ p {
   text-align: center;
   color: white;
 }
+
+.center-favorites {
+  width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  justify-content: center;
+  align-items: center;
+}

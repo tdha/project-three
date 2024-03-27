@@ -9,7 +9,7 @@ import AuthPage from '../AuthPage/AuthPage';
 import HomePage from '../HomePage/HomePage';
 
 import NavBar from '../../components/NavBar/NavBar';
-import FilteredPage from '../FilteredPage/FilteredPage';
+import FavoritePage from '../FavoritePage/FavoritePage';
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -46,13 +46,10 @@ function App() {
                 }
               />
               <Route
-                path="/filter"
+                path="/favorites"
                 element={
                   <div>
-                    <FilteredPage
-                      search={search}
-                      sendInformation={sendInformation}
-                    />
+                    <FavoritePage />
                   </div>
                 }
               />
