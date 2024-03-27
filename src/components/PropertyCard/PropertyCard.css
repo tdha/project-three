@@ -1,8 +1,7 @@
 .property-card {
-  max-width: 360px;
+  max-width: 500px;
   min-width: 350px;
   background-color: #f9f9f9df;
-  /* background-color: #f9f9f9b2; */
   width: 28%;
   border-radius: 10px;
   -webkit-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.3);
@@ -13,6 +12,7 @@
   flex-direction: column;
   padding-bottom: 1rem;
   position: relative;
+  margin-bottom: 1rem;
 }
 
 .property-card img {
@@ -32,7 +32,7 @@
 
 .property-details {
   padding-left: 1rem;
-  /* width: 80%; */
+  width: 100%;
   font-size: 1.2rem;
 }
 

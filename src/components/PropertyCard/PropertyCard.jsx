@@ -34,12 +34,6 @@ const PropertyCard = ({
 
   const distanceInKilometers = distance / 1000;
 
-  // const affordability() {
-
-  // }
-
-
-
   return (
     <>
       <div className="property-card">
@@ -56,17 +50,25 @@ const PropertyCard = ({
               <strong>Purchase Price:</strong> {formattedValue}
             </p>
             <p>
+              <strong>Postcode:</strong> {propertyData.property_post_code}
+            </p>
+            <p>
+              <strong>Area:</strong>{' '}
+              {propertyData.area === ''
+                ? 'No information'
+                : `${propertyData.area} m2`}
+            </p>
+            <p>
               <strong>Travel Time:</strong> {secondsToTime(travelTime)}
             </p>
             <p>
               <strong>Distance:</strong> {distanceInKilometers.toFixed(2)} Km
             </p>
+
             <p>
               <strong>Transportation:</strong> {transportationType}
             </p>
-            <p>
-              <strong>Postcode:</strong> {propertyData.property_post_code}
-            </p>
+
             <p>
               <strong>Property ID:</strong> {propertyData.property_id}
             </p>
