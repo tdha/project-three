@@ -27,7 +27,7 @@
 * ![Traveltime](https://traveltime.com/)
 * ![Openstreetmap](https://www.openstreetmap.org/)
 
-## Getting 
+## Getting Started
 * App not yet deployed - start-up on computer in the meantime
 * Login 
 * Input place of interest
